@@ -20,17 +20,26 @@ namespace cs_net_WpfApp_resizable
     /// </summary>
     public partial class MainWindow : Window
     {
-        public delegate void Del(string message);
+        public delegate void Delegate(string message);
 
         public MainWindow()
         {
             // Instantiate the delegate.
-            Del handler = DelegateMethod;
+            Delegate handler = DelegateMethod;
 
             // Call the delegate.
             handler("Hello World");
 
-            EventManager.RegisterClassHandler(typeof(System.Windows.Controls.Control), System.Windows.Controls.Control.KeyDownEvent, handler);
+            //TBD: whatever the practical difference is between next two RegisterClassHandler invocation types:
+
+            //1
+            //EventManager.RegisterClassHandler(typeof(System.Windows.Controls.Control), System.Windows.Controls.Control.KeyDownEvent, handler);
+
+            //2
+            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyUpEvent, new KeyEventHandler(keyUp), true);
+
+
+
 
             InitializeComponent();
         }
@@ -40,6 +49,13 @@ namespace cs_net_WpfApp_resizable
         {
             System.Console.WriteLine(message);
         }
+
+        private void keyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.OemComma)
+                MessageBox.Show("YAY!!!");
+        }
+
 
     }
 }
