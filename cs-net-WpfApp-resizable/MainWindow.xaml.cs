@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using static System.Windows.UIElement;
 
 namespace cs_net_WpfApp_resizable
 {
@@ -23,42 +22,16 @@ namespace cs_net_WpfApp_resizable
     {
         public MainWindow()
         {
-
-            //access any key press at any time.
-            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyDownEvent, new KeyEventHandler(KeyUpDelegateMethod), true);
-
-            //EventManager.RegisterClassHandler(typeof(Window), Mouse.MouseWheelEvent, new MouseWheelHandler(), true);
-
-            //EventManager.RegisterClassHandler(typeof(Window), Mouse.MouseWheelEvent, new MouseWheelHandler(MainWindow_MouseWheel), true);
-
-            MouseWheel += MainWindow_MouseWheel;
-
-
+            MouseWheel += MouseWheelDelegate;
             InitializeComponent();
         }
 
-        private static void KeyUpDelegateMethod(object sender, KeyEventArgs e)
-        {
-
-            System.Console.WriteLine(e.Key);
-
-
-            var isCtrl = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
-
-            //if (isCtrl) System.Console.WriteLine("isCtrl");
-
-        }
-
-        private static void MainWindow_MouseWheel(object sender, MouseWheelEventArgs e)
+        private static void MouseWheelDelegate(object sender, MouseWheelEventArgs e)
         {
 
             var isCtrl = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
             var printCtrl = (isCtrl) ? " + isCtrl" : "";
 
-            //if (isCtrl) System.Console.WriteLine("isCtrl");
-
-
-            //MouseWheelEventArgs
             System.Console.WriteLine(e.Delta + printCtrl);
             //Accumulate some value
             //someValue += e.Delta;

@@ -1,6 +1,9 @@
 https://www.youtube.com/watch?v=J4J3ZcXRN_E
 Windows Forms tutorial - C#
 
+Purpose: resize all widget elements on the form, by simply listening for mouse event and keyboard events. Like how i expect all forms in all applications to always work. Default font of 8 pt is too squinty by far for my tastes.
+
+[//]: # (Status: some keyboard input success, next is iterating all elements to change their sizes in a correct fashion.)
 
 ### Topics
 
@@ -31,6 +34,7 @@ Windows Forms tutorial - C#
 	
 - mousewheel delegates work differently, seemingly.
 
+- `using static System.Windows.UIElement;` -- not sure why wasn't necessary for `MouseWheel += MouseWheelDelegate;` to work, somehow the scope of this class "knew" this.
 
 
 ### Observations
@@ -40,11 +44,11 @@ Windows Forms tutorial - C#
 	1. Changing either paramater of the dev. meth. breaks typing, preventing compilation and thus execution obviously.
 	1. **Navigating to definition** (`F12`) shows that matching signature, appearing that delegates are designed to overriden. 
 
-		namespace System.Windows.Input
-		{
-		    public delegate void KeyEventHandler(object sender, KeyEventArgs e);
-		}
-
-
+```
+namespace System.Windows.Input
+{
+    public delegate void KeyEventHandler(object sender, KeyEventArgs e);
+}
+```
 	- summary: One essentially passes in a method of matching signature, which will be eventually called. Precisely how TBD. 
 
