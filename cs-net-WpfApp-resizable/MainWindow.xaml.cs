@@ -20,34 +20,24 @@ namespace cs_net_WpfApp_resizable
     /// </summary>
     public partial class MainWindow : Window
     {
-        public delegate void Delegate(string message);
-
         public MainWindow()
         {
-            // Instantiate the delegate.
-            Delegate handler = DelegateMethod;
 
-            // Call the delegate.
-            handler("Hello World");
-
-            //TBD: whatever the practical difference is between next two RegisterClassHandler invocation types:
-
-            //1
-            //EventManager.RegisterClassHandler(typeof(System.Windows.Controls.Control), System.Windows.Controls.Control.KeyDownEvent, handler);
-
-            //2
-            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyUpEvent, new KeyEventHandler(keyUp), true);
-
+            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyUpEvent, new KeyEventHandler(MyStrangeMethod), true);
+            
 
 
 
             InitializeComponent();
         }
 
-        // Create a method for a delegate.
-        public static void DelegateMethod(string message)
+        // Create a method for .... i'm uncertain if it's valid to call this part the delegate... but I'll go with Yes, it is, since it's semantically executing later.
+        public static void MyStrangeMethod(object sender, KeyEventArgs e)
         {
-            System.Console.WriteLine(message);
+            //System.Console.WriteLine(message);
+            if (e.Key == Key.OemComma)
+                MessageBox.Show("YAY!!!");
+
         }
 
         private void keyUp(object sender, KeyEventArgs e)
