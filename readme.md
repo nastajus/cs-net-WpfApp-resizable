@@ -6,6 +6,9 @@ Windows Forms tutorial - C#
 
 - Visual Studio windows hiding locations.
 - Delegates
+- KeyEventHandler delegate
+- MouseWheel delegate.
+- [Capture keyboard and mouse](https://stackoverflow.com/questions/22155512/c-sharp-wpf-capture-keyboard-and-mouse).
 
 
 ### Gotchas
@@ -26,7 +29,7 @@ Windows Forms tutorial - C#
 	- and second, I needed to realize I was supposed to implement my own method of matching signature to the first method. i may refer to this as  "overriding method" or "extending method".
 	- the guide refers to **wrapping** when bridging these two levels.
 	
-
+- mousewheel delegates work differently, seemingly.
 
 
 
@@ -44,3 +47,4 @@ Windows Forms tutorial - C#
 
 
 	- summary: One essentially passes in a method of matching signature, which will be eventually called. Precisely how TBD. 
+

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//using static System.Windows.UIElement;
 
 namespace cs_net_WpfApp_resizable
 {
@@ -23,29 +24,38 @@ namespace cs_net_WpfApp_resizable
         public MainWindow()
         {
 
-            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyUpEvent, new KeyEventHandler(MyStrangeMethod), true);
-            
+            //access any key press at any time.
+            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyDownEvent, new KeyEventHandler(KeyUpDelegateMethod), true);
 
+            //EventManager.RegisterClassHandler(typeof(Window), Mouse.MouseWheelEvent, new MouseWheelHandler(), true);
+
+            //EventManager.RegisterClassHandler(typeof(Window), Mouse.MouseWheelEvent, new MouseWheelHandler(MainWindow_MouseWheel), true);
+
+            MouseWheel += MainWindow_MouseWheel;
 
 
             InitializeComponent();
         }
 
-        // Create a method for .... i'm uncertain if it's valid to call this part the delegate... but I'll go with Yes, it is, since it's semantically executing later.
-        public static void MyStrangeMethod(object sender, KeyEventArgs e)
+        private static void KeyUpDelegateMethod(object sender, KeyEventArgs e)
         {
-            //System.Console.WriteLine(message);
-            if (e.Key == Key.OemComma)
-                MessageBox.Show("YAY!!!");
+
+            System.Console.WriteLine(e.Key);
+
+
+            var isCtrl = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+
+            //if (isCtrl) System.Console.WriteLine("isCtrl");
 
         }
 
-        private void keyUp(object sender, KeyEventArgs e)
+        private static void MainWindow_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (e.Key == Key.OemComma)
-                MessageBox.Show("YAY!!!");
+            //MouseWheelEventArgs
+            System.Console.WriteLine(e.Delta);
+            //Accumulate some value
+            //someValue += e.Delta;
+
         }
-
-
     }
 }
