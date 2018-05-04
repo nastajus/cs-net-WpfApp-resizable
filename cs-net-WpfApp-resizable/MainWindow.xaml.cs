@@ -51,8 +51,15 @@ namespace cs_net_WpfApp_resizable
 
         private static void MainWindow_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+
+            var isCtrl = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+            var printCtrl = (isCtrl) ? " + isCtrl" : "";
+
+            //if (isCtrl) System.Console.WriteLine("isCtrl");
+
+
             //MouseWheelEventArgs
-            System.Console.WriteLine(e.Delta);
+            System.Console.WriteLine(e.Delta + printCtrl);
             //Accumulate some value
             //someValue += e.Delta;
 
